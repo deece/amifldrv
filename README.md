@@ -3,6 +3,12 @@
 This is the source code for the `amifldrv` kernel module used by the AMI
 Aptio flashing tool for linux, `afulnx` or the HP fork `safulnx2`.
 
+This has been patched to work with Linux 6.3+ (tested on 6.8.0), by
+addressing the following error:
+amifldrv/amifldrv.c:357:23: error: assignment of read-only member ‘vm_flags’
+  357 |         vma->vm_flags |= VM_LOCKED;
+
+
 All of the AMIs BIOS flash tools bring their own version of the driver,
 trying to compile it in the background which on most systems fails because
 the kernel is much newer, compile options are broken or the tool/driver does
@@ -18,7 +24,8 @@ An original dump of the sourcecode of the corresponding tool can be
 retrieved by running the flash tool, pressing CTRL-Z and looking into
 the `.temp` directory. 
 
-This repo is a fork of Roman Hargraves https://github.com/RomanHargrave/amifldrv
+This repo is a fork of Florian Lohoff's https://github.com/flohoff/amifldrv
+which is a fork of Roman Hargraves https://github.com/RomanHargrave/amifldrv
 
 # Compatibility
 
